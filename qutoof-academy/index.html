@@ -458,14 +458,17 @@
         background-color: var(--white);
       }
 
-      .media-item img {
+      .media-item img,
+      .media-item video {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: var(--transition);
       }
 
-      .media-item:hover img {
+      /* تأثير التكبير عند تمرير الماوس */
+      .media-item:hover img,
+      .media-item:hover video {
         transform: scale(1.05);
       }
 
@@ -653,10 +656,12 @@
         </div>
 
         <div class="media-item animate-up">
-          <video src="vid/VID-20260425-WA0044.mp4"></video>
-          <!-- <a href="#" class="video-overlay">
-            <i class="fa-regular fa-circle-play"></i>
-          </a> -->
+          <video
+            class="media-item animate-up"
+            src="vid/VID-20260425-WA0044.mp4"
+            controls
+            preload="metadata"
+          ></video>
         </div>
       </div>
     </section>
