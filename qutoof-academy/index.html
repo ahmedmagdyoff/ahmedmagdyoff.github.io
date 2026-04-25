@@ -484,7 +484,9 @@
         align-items: center;
         justify-content: center;
         transition: var(--transition);
-        cursor: pointer;
+
+        /* السطر ده هو الحل: بيخلي الضغطة تعدي من الغطاء وتروح للفيديو */
+        pointer-events: none;
       }
 
       .media-item:hover .video-overlay {
@@ -555,6 +557,77 @@
       .team-card p {
         color: var(--text-light);
         font-size: 1.1rem;
+      }
+
+      /* --- إعدادات البوب أب (Modal) --- */
+      .modal {
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85); /* خلفية سوداء شفافة */
+        backdrop-filter: blur(8px); /* تأثير ضبابي عصري للخلفية */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          opacity 0.3s ease,
+          visibility 0.3s ease;
+      }
+
+      /* الكلاس الذي سيتم إضافته لإظهار البوب أب */
+      .modal.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .modal-content {
+        max-width: 90%;
+        max-height: 90vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform: scale(0.8);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .modal.show .modal-content {
+        transform: scale(1);
+      }
+
+      .modal-content img,
+      .modal-content video {
+        max-width: 100%;
+        max-height: 85vh;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: var(--white);
+        font-size: 45px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: var(--transition);
+        z-index: 1001;
+      }
+
+      .close-modal:hover {
+        color: var(--secondary-color);
+        transform: scale(1.1);
+      }
+
+      /* جعل مؤشر الماوس يظهر كيد عند الوقوف على الصور والفيديوهات في المعرض */
+      .media-item img,
+      .media-item video {
+        cursor: pointer;
       }
     </style>
   </head>
@@ -659,9 +732,11 @@
           <video
             class="media-item animate-up"
             src="vid/VID-20260425-WA0044.mp4"
-            controls
             preload="metadata"
           ></video>
+          <a class="video-overlay">
+            <i class="fa-regular fa-circle-play"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -779,6 +854,10 @@
           ></a>
         </div> -->
       </div>
+      <div id="mediaModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content" id="modalContent"></div>
+      </div>
     </footer>
 
     <script>
@@ -800,6 +879,68 @@
 
         const animateElements = document.querySelectorAll(".animate-up");
         animateElements.forEach((el) => observer.observe(el));
+
+        // --- سكربت البوب أب (Lightbox Modal) ---
+        const modal = document.getElementById("mediaModal");
+        const modalContent = document.getElementById("modalContent");
+        const closeModal = document.querySelector(".close-modal");
+
+        // نحدد كل الصور والفيديوهات اللي جوه قسم المعرض
+        const mediaItems = document.querySelectorAll(
+          ".media-item img, .media-item video",
+        );
+
+        mediaItems.forEach((item) => {
+          item.addEventListener("click", function (e) {
+            e.preventDefault(); // لمنع السلوك الافتراضي
+
+            // إظهار النافذة
+            modal.classList.add("show");
+
+            // تفريغ المحتوى القديم عشان ما يظهرش فوق بعضه
+            modalContent.innerHTML = "";
+
+            // لو العنصر المضعوط عليه صورة
+            if (this.tagName === "IMG") {
+              const img = document.createElement("img");
+              img.src = this.src;
+              modalContent.appendChild(img);
+            }
+            // لو العنصر المضعوط عليه فيديو
+            else if (this.tagName === "VIDEO") {
+              const video = document.createElement("video");
+              video.src = this.src;
+              video.controls = true;
+              video.autoplay = true; // تشغيل تلقائي لما يفتح
+              modalContent.appendChild(video);
+            }
+          });
+        });
+
+        // دالة لإغلاق النافذة وتفريغ المحتوى (عشان الفيديو يقف)
+        function hideModal() {
+          modal.classList.remove("show");
+          setTimeout(() => {
+            modalContent.innerHTML = "";
+          }, 300); // الانتظار حتى تنتهي حركة الإغلاق
+        }
+
+        // إغلاق لما ندوس على علامة X
+        closeModal.addEventListener("click", hideModal);
+
+        // إغلاق لما ندوس في أي مكان فاضي بره الصورة/الفيديو
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) {
+            hideModal();
+          }
+        });
+
+        // إغلاق لما ندوس على زرار ESC في الكيبورد
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && modal.classList.contains("show")) {
+            hideModal();
+          }
+        });
       });
     </script>
   </body>
