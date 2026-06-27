@@ -1,0 +1,29 @@
+name: Check
+
+run-name: "${{ github.event.head_commit.message }}"
+
+permissions:
+  contents: read
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify Required Files
+        run: |
+          test -f index.html
+
+      - name: Success
+        run: echo "Project validation passed."

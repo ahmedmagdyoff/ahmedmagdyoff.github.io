@@ -1,0 +1,23 @@
+name: Feature Request
+description: Suggest a feature
+title: "[Feature]: "
+labels:
+  - enhancement
+
+body:
+  - type: textarea
+    id: feature
+    attributes:
+      label: Describe the feature
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
