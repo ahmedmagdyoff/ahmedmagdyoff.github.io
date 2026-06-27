@@ -17,619 +17,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <style>
-      /* --- المتغيرات والألوان --- */
-      :root {
-        --primary-color: #2b5f4c; /* أخضر إسلامي هادئ */
-        --secondary-color: #c5a880; /* ذهبي / بيج داكن */
-        --bg-color: #fcfbf9; /* بيج فاتح جداً مريح للعين */
-        --white: #ffffff;
-        --text-dark: #2d3748;
-        --text-light: #718096;
-        --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
-        --shadow-hover: 0 20px 40px rgba(43, 95, 76, 0.1);
-        --border-radius: 20px;
-        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      /* --- الإعدادات العامة --- */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Zain", sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-dark);
-        line-height: 1.8;
-        overflow-x: hidden;
-        scroll-behavior: smooth;
-      }
-
-      h1,
-      h2,
-      h3,
-      h4 {
-        font-weight: 700;
-        line-height: 1.4;
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      section {
-        padding: 48px 0;
-        margin: 48px 0;
-        position: relative;
-      }
-
-      .section-header {
-        text-align: center;
-        margin-bottom: 60px;
-      }
-
-      .section-header i {
-        font-size: 2rem;
-        color: var(--secondary-color);
-        margin-bottom: 15px;
-      }
-
-      .section-header h2 {
-        font-size: 2.5rem;
-        color: var(--primary-color);
-        margin-bottom: 15px;
-      }
-
-      /* --- تأثيرات الدخول (Animations) --- */
-      .animate-up {
-        opacity: 0;
-        transform: translateY(40px);
-        transition:
-          opacity 0.8s ease-out,
-          transform 0.8s ease-out;
-      }
-
-      .animate-up.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* --- قسم البطل (Hero Section) --- */
-      .hero {
-        background-color: var(--primary-color);
-        /* نمط هندسي إسلامي خفيف بالخلفية */
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-        color: var(--white);
-        text-align: center;
-        margin-top: unset;
-        padding: 180px 20px;
-        min-height: 80vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-bottom-left-radius: 60px;
-        border-bottom-right-radius: 60px;
-      }
-
-      .hero h1 {
-        font-size: 4rem;
-        font-weight: 900;
-        margin-bottom: 20px;
-        text-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      }
-
-      .hero p {
-        font-size: 1.8rem;
-        font-weight: 400;
-        color: #e2e8f0;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      /* --- قسم من نحن (About) --- */
-      .about-content {
-        background: var(--white);
-        padding: 50px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-soft);
-        text-align: center;
-      }
-
-      .about-content > p {
-        font-size: 1.3rem;
-        margin-bottom: 40px;
-        color: var(--text-light);
-      }
-
-      .about-features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 30px;
-        text-align: right;
-      }
-
-      .about-feature-item {
-        padding: 30px;
-        background: var(--bg-color);
-        border-radius: 15px;
-        border-right: 4px solid var(--secondary-color);
-        transition: var(--transition);
-      }
-
-      .about-feature-item:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-soft);
-      }
-
-      .about-feature-item h4 {
-        color: var(--primary-color);
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      /* --- قسم رؤيتنا (Vision) --- */
-      .vision {
-        background-color: var(--white);
-      }
-
-      .vision-container {
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: center;
-      }
-
-      .vision-text {
-        font-size: 1.5rem;
-        color: var(--text-dark);
-        margin-bottom: 40px;
-      }
-
-      .vision-tags {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .tag {
-        background: var(--bg-color);
-        color: var(--primary-color);
-        padding: 12px 30px;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 1.2rem;
-        box-shadow: var(--shadow-soft);
-        border: 1px solid rgba(43, 95, 76, 0.1);
-      }
-
-      /* --- المسارات التعليمية (Programs) --- */
-      .programs-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 30px;
-      }
-
-      .program-card {
-        background: var(--white);
-        padding: 40px 30px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-soft);
-        text-align: center;
-        transition: var(--transition);
-        position: relative;
-        overflow: hidden;
-      }
-
-      .program-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: var(--secondary-color);
-        transform: scaleX(0);
-        transition: var(--transition);
-      }
-
-      .program-card:hover {
-        transform: translateY(-10px);
-        box-shadow: var(--shadow-hover);
-      }
-
-      .program-card:hover::before {
-        transform: scaleX(1);
-      }
-
-      .program-card i {
-        font-size: 3rem;
-        color: var(--primary-color);
-        margin-bottom: 20px;
-      }
-
-      .program-card h3 {
-        font-size: 1.6rem;
-        margin-bottom: 15px;
-        color: var(--text-dark);
-      }
-
-      .program-card p {
-        color: var(--text-light);
-        font-size: 1.1rem;
-      }
-
-      /* --- نقاط القوة (Features) --- */
-      .features {
-        background-color: var(--white);
-      }
-
-      .features-list {
-        display: flex;
-        justify-content: center;
-        gap: 40px;
-        flex-wrap: wrap;
-      }
-
-      .feature-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: 250px;
-      }
-
-      .feature-icon {
-        width: 80px;
-        height: 80px;
-        background: var(--bg-color);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2rem;
-        color: var(--primary-color);
-        margin-bottom: 20px;
-        box-shadow: var(--shadow-soft);
-        transition: var(--transition);
-      }
-
-      .feature-box:hover .feature-icon {
-        background: var(--primary-color);
-        color: var(--white);
-        transform: rotateY(180deg);
-      }
-
-      .feature-box h4 {
-        font-size: 1.4rem;
-      }
-
-      /* --- قسم التواصل (Contact) --- */
-      .contact-wrap {
-        background: var(--primary-color);
-        border-radius: var(--border-radius);
-        padding: 60px;
-        text-align: center;
-        color: var(--white);
-        box-shadow: var(--shadow-soft);
-        /* نمط إسلامي للخلفية */
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      }
-
-      .contact-wrap h2 {
-        color: var(--white);
-        font-size: 2.2rem;
-        margin-bottom: 40px;
-      }
-
-      .contact-links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-
-      .contact-btn {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 16px 32px;
-        border-radius: 50px;
-        font-size: 1.2rem;
-        font-weight: 700;
-        transition: var(--transition);
-        background: var(--white);
-        color: var(--text-dark);
-      }
-
-      .contact-btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .btn-whatsapp {
-        background: #25d366;
-        color: white;
-      }
-      .btn-whatsapp:hover {
-        background: #20bd5a;
-      }
-
-      .btn-facebook {
-        background: #1877f2;
-        color: white;
-      }
-      .btn-facebook:hover {
-        background: #166fe5;
-      }
-
-      .btn-phone {
-        background: var(--white);
-        color: var(--primary-color);
-      }
-
-      /* --- الفوتر (Footer) --- */
-      footer {
-        background-color: var(--white);
-        padding: 30px 0;
-        text-align: center;
-        border-top: 1px solid #edf2f7;
-      }
-
-      footer p {
-        color: var(--text-light);
-        font-size: 1.1rem;
-        /* margin-bottom: 10px; */
-      }
-      /*
-      .social-icons {
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-      }
-
-      .social-icons a {
-        color: var(--text-light);
-        font-size: 1.2rem;
-        transition: var(--transition);
-      }
-
-      .social-icons a:hover {
-        color: var(--primary-color);
-      }
-         */
-
-      /* --- التجاوب مع الشاشات (Responsive) --- */
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2.5rem;
-        }
-        .hero p {
-          font-size: 1.3rem;
-        }
-        .hero {
-          padding: 120px 20px;
-          border-bottom-left-radius: 30px;
-          border-bottom-right-radius: 30px;
-        }
-        .about-content {
-          padding: 30px;
-        }
-        .vision-text {
-          font-size: 1.2rem;
-        }
-        .contact-wrap {
-          padding: 40px 20px;
-        }
-        .contact-btn {
-          width: 100%;
-          justify-content: center;
-        }
-      }
-
-      /* --- قسم معرض الصور والفيديوهات (Gallery) --- */
-      .media-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 20px;
-        margin-top: 40px;
-      }
-
-      .media-item {
-        border-radius: var(--border-radius);
-        overflow: hidden;
-        box-shadow: var(--shadow-soft);
-        position: relative;
-        aspect-ratio: 16 / 9;
-        background-color: var(--white);
-      }
-
-      .media-item img,
-      .media-item video {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: var(--transition);
-      }
-
-      /* تأثير التكبير عند تمرير الماوس */
-      .media-item:hover img,
-      .media-item:hover video {
-        transform: scale(1.05);
-      }
-
-      /* تنسيق غطاء الفيديو */
-      .video-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: var(--transition);
-
-        /* السطر ده هو الحل: بيخلي الضغطة تعدي من الغطاء وتروح للفيديو */
-        pointer-events: none;
-      }
-
-      .media-item:hover .video-overlay {
-        background: rgba(0, 0, 0, 0.5);
-      }
-
-      .video-overlay i {
-        font-size: 4rem;
-        color: var(--white);
-        opacity: 0.8;
-        transition: var(--transition);
-      }
-
-      .media-item:hover .video-overlay i {
-        transform: scale(1.1);
-        opacity: 1;
-      }
-
-      /* --- قسم فريق العمل (Team) --- */
-      .team-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
-      }
-
-      .team-card {
-        background: var(--white);
-        border-radius: var(--border-radius);
-        padding: 40px 20px;
-        text-align: center;
-        box-shadow: var(--shadow-soft);
-        transition: var(--transition);
-      }
-
-      .team-card:hover {
-        transform: translateY(-10px);
-        box-shadow: var(--shadow-hover);
-      }
-
-      .team-avatar {
-        width: 120px;
-        height: 120px;
-        border-radius: 50%;
-        background-color: var(--bg-color);
-        margin: 0 auto 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 3rem;
-        color: var(--secondary-color);
-        border: 4px solid var(--primary-color);
-        overflow: hidden;
-      }
-
-      .team-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .team-card h3 {
-        color: var(--text-dark);
-        font-size: 1.5rem;
-        margin-bottom: 5px;
-      }
-
-      .team-card p {
-        color: var(--text-light);
-        font-size: 1.1rem;
-      }
-
-      /* --- إعدادات البوب أب (Modal) --- */
-      .modal {
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.85); /* خلفية سوداء شفافة */
-        backdrop-filter: blur(8px); /* تأثير ضبابي عصري للخلفية */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        visibility: hidden;
-        transition:
-          opacity 0.3s ease,
-          visibility 0.3s ease;
-      }
-
-      /* الكلاس الذي سيتم إضافته لإظهار البوب أب */
-      .modal.show {
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .modal-content {
-        max-width: 90%;
-        max-height: 90vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        transform: scale(0.8);
-        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .modal.show .modal-content {
-        transform: scale(1);
-      }
-
-      .modal-content img,
-      .modal-content video {
-        max-width: 100%;
-        max-height: 85vh;
-        border-radius: 15px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      }
-
-      .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        color: var(--white);
-        font-size: 45px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: var(--transition);
-        z-index: 1001;
-      }
-
-      .close-modal:hover {
-        color: var(--secondary-color);
-        transform: scale(1.1);
-      }
-
-      /* جعل مؤشر الماوس يظهر كيد عند الوقوف على الصور والفيديوهات في المعرض */
-      .media-item img,
-      .media-item video {
-        cursor: pointer;
-      }
-    </style>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
     <section class="hero">
@@ -697,41 +85,41 @@
       </div>
       <div class="media-grid">
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img\WhatsApp Image 2026-04-23 at 6.18.03 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 6.18.03 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 6.18.01 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 6.18.01 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 6.18.02 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 6.18.02 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 7.53.25 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 7.53.25 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 7.35.14 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 7.35.14 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 7.59.48 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 7.59.48 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 7.59.47 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 7.59.47 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up" style="transition-delay: 0.1s">
-          <img src="img/WhatsApp Image 2026-04-23 at 7.53.52 PM.jpeg" />
+          <img src="images/WhatsApp Image 2026-04-23 at 7.53.52 PM.jpeg" />
         </div>
 
         <div class="media-item animate-up">
           <video
             class="media-item animate-up"
-            src="vid/WhatsApp Video 2026-06-17 at 10.43.26 PM.mp4"
+            src="videos/WhatsApp Video 2026-06-17 at 10.43.26 PM.mp4"
             preload="metadata"
           ></video>
           <a class="video-overlay">
@@ -742,7 +130,7 @@
         <div class="media-item animate-up">
           <video
             class="media-item animate-up"
-            src="vid/WhatsApp Video 2026-06-17 at 10.43.26 PM (1).mp4"
+            src="videos/WhatsApp Video 2026-06-17 at 10.43.26 PM (1).mp4"
             preload="metadata"
           ></video>
           <a class="video-overlay">
@@ -753,7 +141,7 @@
         <div class="media-item animate-up">
           <video
             class="media-item animate-up"
-            src="vid/WhatsApp Video 2026-06-17 at 10.43.26 PM (2).mp4"
+            src="videos/WhatsApp Video 2026-06-17 at 10.43.26 PM (2).mp4"
             preload="metadata"
           ></video>
           <a class="video-overlay">
@@ -764,7 +152,7 @@
         <div class="media-item animate-up">
           <video
             class="media-item animate-up"
-            src="vid/WhatsApp Video 2026-06-17 at 10.43.27 PM.mp4"
+            src="videos/WhatsApp Video 2026-06-17 at 10.43.27 PM.mp4"
             preload="metadata"
           ></video>
           <a class="video-overlay">
@@ -885,14 +273,6 @@
     <footer>
       <div class="container">
         <p>حقوق النشر © أكاديمية قطوف لتعليم القرآن والمهارات</p>
-        <!-- <div class="social-icons">
-          <a href="https://facebook.com/share/18U8JBKvM3" target="_blank"
-            ><i class="fa-brands fa-facebook"></i
-          ></a>
-          <a href="https://wa.me/201035470588" target="_blank"
-            ><i class="fa-brands fa-whatsapp"></i
-          ></a>
-        </div> -->
       </div>
       <div id="mediaModal" class="modal">
         <span class="close-modal">&times;</span>
@@ -900,88 +280,6 @@
       </div>
     </footer>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const observerOptions = {
-          root: null,
-          rootMargin: "0px",
-          threshold: 0.15,
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, observerOptions);
-
-        const animateElements = document.querySelectorAll(".animate-up");
-        animateElements.forEach((el) => observer.observe(el));
-
-        // --- سكربت البوب أب (Lightbox Modal) ---
-        const modal = document.getElementById("mediaModal");
-        const modalContent = document.getElementById("modalContent");
-        const closeModal = document.querySelector(".close-modal");
-
-        // نحدد كل الصور والفيديوهات اللي جوه قسم المعرض
-        const mediaItems = document.querySelectorAll(
-          ".media-item img, .media-item video",
-        );
-
-        mediaItems.forEach((item) => {
-          item.addEventListener("click", function (e) {
-            e.preventDefault(); // لمنع السلوك الافتراضي
-
-            // إظهار النافذة
-            modal.classList.add("show");
-
-            // تفريغ المحتوى القديم عشان ما يظهرش فوق بعضه
-            modalContent.innerHTML = "";
-
-            // لو العنصر المضعوط عليه صورة
-            if (this.tagName === "IMG") {
-              const img = document.createElement("img");
-              img.src = this.src;
-              modalContent.appendChild(img);
-            }
-            // لو العنصر المضعوط عليه فيديو
-            else if (this.tagName === "VIDEO") {
-              const video = document.createElement("video");
-              video.src = this.src;
-              video.controls = true;
-              video.autoplay = true; // تشغيل تلقائي لما يفتح
-              modalContent.appendChild(video);
-            }
-          });
-        });
-
-        // دالة لإغلاق النافذة وتفريغ المحتوى (عشان الفيديو يقف)
-        function hideModal() {
-          modal.classList.remove("show");
-          setTimeout(() => {
-            modalContent.innerHTML = "";
-          }, 300); // الانتظار حتى تنتهي حركة الإغلاق
-        }
-
-        // إغلاق لما ندوس على علامة X
-        closeModal.addEventListener("click", hideModal);
-
-        // إغلاق لما ندوس في أي مكان فاضي بره الصورة/الفيديو
-        modal.addEventListener("click", function (e) {
-          if (e.target === modal) {
-            hideModal();
-          }
-        });
-
-        // إغلاق لما ندوس على زرار ESC في الكيبورد
-        document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && modal.classList.contains("show")) {
-            hideModal();
-          }
-        });
-      });
-    </script>
+    <script src="js/script.js"></script>
   </body>
 </html>
