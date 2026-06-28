@@ -70,8 +70,8 @@ Run the website using any static web server, or simply open `index.html` in your
 .
 ├── css/
 ├── images/
-├── videos/
 ├── js/
+├── videos/
 ├── index.html
 └── README.md
 ```
